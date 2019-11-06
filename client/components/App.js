@@ -21,12 +21,9 @@ const App = () => {
   const fetchData = () => {
     if (prefCities.length === 0) return
     setRetrievedData(false)
-
     const requests = prefCities.map(city => {
       return fetch(`https://www.metaweather.com/api/location/${city.id}/`)
     });
-
-    console.log('before promise all')
     Promise.all(requests)
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then(posts => {
